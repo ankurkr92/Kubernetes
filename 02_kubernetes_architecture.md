@@ -100,7 +100,7 @@ MIT
 
 ## 🙋‍♂️ Author
 
-[Your Name] - [[your-email@example.com](mailto:your-email@example.com)]
+[Ankur Kumar Singh  ] - [[ankurkr92@outlook.com](mailto:your-email@example.com)]
 
 ---
 
