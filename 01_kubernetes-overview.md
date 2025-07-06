@@ -45,6 +45,38 @@ Kubernetes is built to be extended and customized:
   - Monitoring (Prometheus), CI/CD (ArgoCD), Logging (Fluentd), Security (OPA)
 
 ---
+As of 2025, the clear leader in container orchestration is:
+
+🏆 Kubernetes
+📊 Market Leadership
+Over 90% of container orchestration workloads in the enterprise are run on Kubernetes.
+
+Backed by major cloud providers:
+
+Google Kubernetes Engine (GKE)
+
+Amazon Elastic Kubernetes Service (EKS)
+
+Azure Kubernetes Service (AKS)
+
+🔗 Ecosystem Strength
+CNCF (Cloud Native Computing Foundation) reports thousands of contributors and hundreds of certified tools in the Kubernetes ecosystem.
+
+Huge community, extensive documentation, and regular updates.
+
+🧰 Extensibility
+Custom Resource Definitions (CRDs), Operators, Helm charts, and plugins make Kubernetes extremely flexible and extensible.
+
+Used as the base platform by other enterprise solutions like OpenShift and Rancher.
+
+🏁 Summary
+Orchestrator	Popularity	Enterprise Adoption	Ecosystem	Cloud Support
+Kubernetes	🟢 Highest	🟢 Widely Adopted	🟢 Strong	🟢 Native in AWS, Azure, GCP
+Docker Swarm	🔴 Low	🔴 Limited	🔴 Weak	🟡 Partial
+Nomad	🟡 Niche	🟡 Some use cases	🟡 Growing	🟡 Manual setup
+OpenShift	🟢 High	🟢 Strong (via K8s)	🟢 Rich	🟢 Available
+
+In short: Kubernetes is the de facto standard and undisputed leader in container orchestration.
 
 ## 🏁 Summary
 
