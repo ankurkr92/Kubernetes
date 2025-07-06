@@ -82,7 +82,7 @@ These run the containerized applications.
 
 ![image](https://github.com/user-attachments/assets/e12a8d1b-de12-40d4-b71b-9c3d4b7051fe)
 
-![image](https://github.com/user-attachments/assets/5022696f-c51a-4138-ba63-94de2bf9c90b)
+(https://camo.githubusercontent.com/d381547c80f03cc120dc61f5d601a2871a941075337bc7ff18ab5232aa3ed403/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f76322f726573697a653a6669743a313430302f312a30537564786575356d51794e336168693146563439412e706e67)
 
 > Source: [Kubernetes Official Documentation](https://kubernetes.io/docs/concepts/architecture/)
 
