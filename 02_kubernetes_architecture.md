@@ -80,6 +80,9 @@ These run the containerized applications.
 
 ## 🖼️ Visual Overview
 
+![image](https://github.com/user-attachments/assets/e12a8d1b-de12-40d4-b71b-9c3d4b7051fe)
+
+
 ![Kubernetes Architecture Diagram](https://kubernetes.io/images/docs/components-of-kubernetes.svg)
 
 > Source: [Kubernetes Official Documentation](https://kubernetes.io/docs/concepts/architecture/)
