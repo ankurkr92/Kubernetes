@@ -45,10 +45,10 @@ Kubernetes is built to be extended and customized:
   - Monitoring (Prometheus), CI/CD (ArgoCD), Logging (Fluentd), Security (OPA)
 
 ---
-As of 2025, the clear leader in container orchestration is:
+**As of 2025, the clear leader in container orchestration is:**
 
-🏆 Kubernetes
-📊 Market Leadership
+**🏆 Kubernetes
+📊 Market Leadership**
 Over 90% of container orchestration workloads in the enterprise are run on Kubernetes.
 
 Backed by major cloud providers:
