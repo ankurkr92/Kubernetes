@@ -70,11 +70,13 @@ Custom Resource Definitions (CRDs), Operators, Helm charts, and plugins make Kub
 Used as the base platform by other enterprise solutions like OpenShift and Rancher.
 
 🏁 Summary
-Orchestrator	Popularity	Enterprise Adoption	Ecosystem	Cloud Support
-Kubernetes	🟢 Highest	🟢 Widely Adopted	🟢 Strong	🟢 Native in AWS, Azure, GCP
-Docker Swarm	🔴 Low	🔴 Limited	🔴 Weak	🟡 Partial
-Nomad	🟡 Niche	🟡 Some use cases	🟡 Growing	🟡 Manual setup
-OpenShift	🟢 High	🟢 Strong (via K8s)	🟢 Rich	🟢 Available
+| Platform       | Community Support | Cloud Integration | Extensibility   | Adoption Rate |
+| -------------- | ----------------- | ----------------- | --------------- | ------------- |
+| **Kubernetes** | ⭐⭐⭐⭐⭐             | ✅ AWS, Azure, GCP | ✅ CRDs, Plugins | 🚀 Very High  |
+| Docker Swarm   | ⭐⭐                | ⚠️ Limited        | ❌               | 🔻 Decreasing |
+| Nomad          | ⭐⭐                | ⚠️ Manual Setup   | ✅ API & Plugins | 🟡 Niche      |
+| OpenShift      | ⭐⭐⭐⭐              | ✅ Built on K8s    | ✅ CRDs + Tools  | 🟢 Enterprise |
+
 
 In short: Kubernetes is the de facto standard and undisputed leader in container orchestration.
 
