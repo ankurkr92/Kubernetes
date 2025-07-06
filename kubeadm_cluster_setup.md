@@ -15,7 +15,7 @@ This document provides a step-by-step guide to setting up a Kubernetes cluster u
 
 ## 🔧 Step 1: Prepare the System
 
-### On All Nodes:
+### On All Nodes - disable swap:
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -26,6 +26,11 @@ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 ### Load required modules:
 
 ```bash
+cat << EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
 sudo modprobe overlay
 sudo modprobe br_netfilter
 ```
@@ -59,11 +64,12 @@ sudo systemctl enable containerd
 ## 📦 Step 3: Install kubeadm, kubelet, kubectl
 
 ```bash
-sudo apt-get install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+Note : if the command says gpg is not found, then install the gpg package ⇒ **apt install gpg** ]
 
 sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
@@ -100,6 +106,12 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/
 
 On each worker node, run the join command shown at the end of the kubeadm init output:
 
+Get the join command (this command is also printed during kubeadm init . Feel free to simply copy it from there).
+```bash
+kubeadm token create --print-join-command
+```
+Copy the join command from the control plane node. Run it on each worker node as root (i.e. with sudo ).
+
 ```bash
 sudo kubeadm join <master-ip>:6443 --token <token> \
     --discovery-token-ca-cert-hash sha256:<hash>
@@ -124,8 +136,18 @@ All nodes should be in `Ready` state.
 
 ```bash
 sudo kubeadm reset -f
-sudo rm -rf /etc/cni/net.d /etc/kubernetes /var/lib/etcd ~/.kube
+sudo systemctl stop kubelet
+sudo systemctl stop containerd
+sudo rm -rf /etc/kubernetes /var/lib/kubelet /var/lib/etcd /etc/cni/net.d ~/.kube
 sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X
+sudo ipvsadm --clear  # Only if IPVS is installed
+sudo systemctl start containerd
+sudo systemctl start kubelet
+
+CNI configuration is not removed. You must remove /etc/cni/net.d manually
+sudo rm -rf /etc/cni/net.d
+
+sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X (iptables rules and IPVS tables are not cleaned,If you wish to reset iptables, you must do so manually)
 ```
 
 ---
@@ -136,7 +158,7 @@ MIT
 
 ## 🙋‍♂️ Author
 
-[Your Name] - [your-email\@example.com]
+[Ankur Kumar Singh] - [ankurkr92@outlook.com]
 
 ---
 
