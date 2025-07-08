@@ -46,6 +46,22 @@ EOF
 
 sudo sysctl --system
 ```
+Without bridge-nf-call-iptables = 1:
+
+[ Pod ] — bridge —> [ eth0 ]  
+          ↪️ traffic bypasses iptables
+With bridge-nf-call-iptables = 1:
+
+[ Pod ] — bridge —> iptables —> [ eth0 ]  
+          ✅ traffic is filtered by firewall rules
+🧪 Real-world use in Kubernetes:
+CNI plugins like Calico, Flannel, or Weave rely on iptables rules.
+
+Without this setting, their traffic control and isolation fails silently.
+
+Services, DNS, ingress controllers, etc., may not work correctly.
+
+Ensures bridged container traffic passes through iptables so firewall rules and network policies work.
 
 ---
 
