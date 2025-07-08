@@ -86,7 +86,7 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-Note : if the command says gpg is not found, then install the gpg package ⇒ **apt install gpg** ]
+Note : if the command says gpg is not found, then install the gpg package ⇒ **sudo apt install gpg** ]
 
 sudo apt update
 sudo apt install -y kubelet kubeadm kubectl (in order to verify the available packages run "apt-cache policy kubelet")
