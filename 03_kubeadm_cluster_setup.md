@@ -89,7 +89,7 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --
 Note : if the command says gpg is not found, then install the gpg package ⇒ **apt install gpg** ]
 
 sudo apt update
-sudo apt install -y kubelet kubeadm kubectl
+sudo apt install -y kubelet kubeadm kubectl (in order to verify the available packages run "apt-cache policy kubelet")
 or
 sudo apt-get install -y kubelet=1.32.1-1.1 kubeadm=1.32.1-1.1 kubectl=1.32.1-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
