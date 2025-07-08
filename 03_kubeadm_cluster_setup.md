@@ -90,6 +90,8 @@ Note : if the command says gpg is not found, then install the gpg package ⇒ **
 
 sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
+or
+sudo apt-get install -y kubelet=1.32.1-1.1 kubeadm=1.32.1-1.1 kubectl=1.32.1-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
