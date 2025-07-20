@@ -29,6 +29,13 @@ Only these fields can be updated:
 - `spec.activeDeadlineSeconds`
 - `spec.tolerations`
 
+| Field                          | What It Does                            | Use Case                                |
+| ------------------------------ | --------------------------------------- | --------------------------------------- |
+| `spec.containers[*].image`     | Update the image of a running container | Deploy a new version of the app         |
+| `spec.initContainers[*].image` | Update image for init containers        | Change init logic if Pod hasn’t started |
+| `spec.activeDeadlineSeconds`   | Set how long the Pod can run            | Useful for jobs or debugging            |
+| `spec.tolerations`             | Change how Pod tolerates taints         | Adjust which nodes the Pod can run on   |
+
 > Other changes require deleting and re-creating the Pod.
 
 ---
