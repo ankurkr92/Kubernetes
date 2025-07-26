@@ -113,6 +113,10 @@ kubectl edit pod pod1
 # Modify the image field
 ```
 
+```bash
+kubectl get pod pod1 -o jsonpath='{.metadata.uid}'
+```
+
 ---
 
 ## 🔹 Kubernetes Namespaces
