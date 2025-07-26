@@ -116,7 +116,13 @@ kubectl edit pod pod1
 ```bash
 kubectl get pod pod1 -o jsonpath='{.metadata.uid}'
 ```
+Target: A standalone Pod
 
+Result: ✅ In-place patch — it updates the pod's image without deleting or recreating it.
+
+Pod UID remains the same
+
+It works only because spec.containers[*].image is a mutable field.
 ---
 
 ## 🔹 Kubernetes Namespaces
