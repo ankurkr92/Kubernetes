@@ -1,0 +1,205 @@
+# Kubernetes Labels, Selectors, and Annotations
+
+This document explains how to use **labels**, **selectors**, and **annotations** in Kubernetes with practical examples.
+
+---
+
+## What are Labels?
+Labels are **key-value pairs** attached to Kubernetes objects such as Pods, Nodes, and Services. They are used to organize, categorize, and select subsets of objects. Labels provide a flexible way of grouping and filtering objects based on user-defined attributes.
+
+Example labels:
+- `env=production`
+- `tier=frontend`
+- `region=us-east1`
+
+---
+
+## What is a Node Selector?
+A **Node Selector** is a simple form of node affinity. It uses labels defined on nodes to decide where a pod should run. By specifying `nodeSelector` in the Pod specification, you tell Kubernetes to schedule the pod only on nodes that have matching labels.
+
+Example: If a node has the label `disktype=ssd`, and your pod’s spec includes `nodeSelector: disktype=ssd`, the pod will only run on that node.
+
+---
+
+## What are Annotations?
+Annotations are similar to labels but are intended for storing **non-identifying metadata**. Unlike labels, annotations are not used for selection. Instead, they are used to attach additional information such as documentation URLs, contact details, or tool-specific metadata to Kubernetes objects.
+
+Example annotations:
+- `owner: dev-team`
+- `documentation: https://docs.myapp.com`
+
+---
+
+## Quick Comparison: Labels vs Annotations vs Node Selectors
+
+| Feature              | Labels                                   | Annotations                                  | Node Selector                      |
+|----------------------|------------------------------------------|----------------------------------------------|------------------------------------|
+| Purpose              | Organize and select objects              | Store additional, non-identifying metadata   | Constrain pod scheduling to nodes  |
+| Key-Value Format     | ✅ Yes                                   | ✅ Yes                                       | Uses node labels                   |
+| Used for Scheduling  | ✅ (with selectors)                      | ❌ No                                        | ✅ Yes                              |
+| Used for Filtering   | ✅ Yes                                   | ❌ No                                        | ❌ No                               |
+| Example              | `env=production`                        | `documentation: https://docs.myapp.com`      | `nodeSelector: disktype=ssd`       |
+
+---
+
+## Organizing Pods with Labels
+Labels help organize and group resources logically.
+
+Example:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: nginx
+    env: production
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+```
+
+---
+
+## Introducing Labels
+- Labels are **metadata**.
+- Used for **selection, grouping, and filtering**.
+
+---
+
+## Specifying Labels When Creating a Pod
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+  labels:
+    app: api
+    tier: backend
+spec:
+  containers:
+  - name: backend
+    image: my-api:latest
+```
+
+---
+
+## Modifying Labels of Existing Pods
+Add or change a label:
+```bash
+kubectl label pod backend env=staging --overwrite
+```
+
+Remove a label:
+```bash
+kubectl label pod backend env-
+```
+
+---
+
+## Listing Subsets of Pods Through Label Selectors
+Get pods with a specific label:
+```bash
+kubectl get pods -l app=nginx
+```
+
+---
+
+## Listing Pods Using a Label Selector (Multiple Conditions)
+```bash
+kubectl get pods -l "env=production,tier=frontend"
+```
+
+Using OR condition:
+```bash
+kubectl get pods -l 'env in (staging,production)'
+```
+
+---
+
+## Using Labels and Selectors to Constrain Pod Scheduling
+Pods can be scheduled onto specific nodes by matching **node labels**.
+
+Label a node:
+```bash
+kubectl label node worker-node-1 disktype=ssd
+```
+
+---
+
+## Using Labels for Categorizing Worker Nodes
+Example:
+```bash
+kubectl label node worker-node-2 env=production
+```
+
+---
+
+## Scheduling Pods to Specific Nodes
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-ssd
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeSelector:
+    disktype: ssd
+```
+
+---
+
+## Scheduling to One Specific Node
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-single-node
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeName: worker-node-1
+```
+
+---
+
+## Annotating Pods
+Annotations store **non-identifying metadata** (e.g., contact info, URLs).
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotated-pod
+  annotations:
+    owner: "dev-team"
+    documentation: "https://docs.myapp.com"
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+```
+
+---
+
+## Looking Up an Object’s Labels and Annotations
+Describe a pod:
+```bash
+kubectl describe pod annotated-pod
+```
+
+Get only labels:
+```bash
+kubectl get pod annotated-pod --show-labels
+```
+
+Get annotations:
+```bash
+kubectl get pod annotated-pod -o jsonpath='{.metadata.annotations}'
+```
