@@ -54,9 +54,10 @@ metadata:
   labels:
     app: nginx
     env: production
+    tier: frontend
 spec:
   containers:
-  - name: frontend
+  - name: nginx
     image: nginx
 ```
 
@@ -76,10 +77,11 @@ metadata:
   name: backend-1
   labels:
     app: redis
+    env: prod
     tier: backend
 spec:
   containers:
-  - name: backend
+  - name: redis
     image: redis
 ```
 
