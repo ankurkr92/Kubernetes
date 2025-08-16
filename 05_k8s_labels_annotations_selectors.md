@@ -50,13 +50,13 @@ Example:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: frontend
+  name: frontend-1
   labels:
     app: nginx
     env: production
 spec:
   containers:
-  - name: nginx
+  - name: frontend
     image: nginx
 ```
 
@@ -73,14 +73,14 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: backend
+  name: backend-1
   labels:
-    app: api
+    app: redis
     tier: backend
 spec:
   containers:
   - name: backend
-    image: my-api:latest
+    image: redis
 ```
 
 ---
@@ -88,7 +88,7 @@ spec:
 ## Modifying Labels of Existing Pods
 Add or change a label:
 ```bash
-kubectl label pod backend env=staging --overwrite
+kubectl label pod backend-1 env=staging --overwrite
 ```
 
 Remove a label:
