@@ -38,7 +38,7 @@ Example annotations:
 | Key-Value Format     | ✅ Yes                                   | ✅ Yes                                       | Uses node labels                   |
 | Used for Scheduling  | ✅ (with selectors)                      | ❌ No                                        | ✅ Yes                              |
 | Used for Filtering   | ✅ Yes                                   | ❌ No                                        | ❌ No                               |
-| Example              | `env=production`                        | `documentation: https://docs.myapp.com`      | `nodeSelector: disktype=ssd`       |
+| Example              | `env=production`                        | `documentation: https://docs.myapp.com`      | `env=production`       |
 
 ---
 
